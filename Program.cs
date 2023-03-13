@@ -5,6 +5,7 @@
  * 
  */
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Conp003A.FinalProject;
 class Program
@@ -14,13 +15,15 @@ class Program
         // theme would be for health patient.
         SectionSeparator("Welcome to Hanfords Clinic!" +
          " Here is a Registry for new Patients." +
-         "Please Answer and Label the inquiery.");
-
+         " Please Answer and Label the inquiery.");
+        
         Console.WriteLine("Enter a first name");
         string firstName = Console.ReadLine();
+        Run(firstName);
 
         Console.WriteLine("PLease enter yout Last Name");
         string lastName = Console.ReadLine();
+        Run(lastName);
 
         Console.WriteLine($" So you are {firstName} {lastName}");
 
@@ -85,7 +88,7 @@ class Program
             Console.WriteLine(a);
             string answer = Console.ReadLine();
             response.Add(answer);
-
+            
         }
 
 
@@ -96,13 +99,37 @@ class Program
     /// <param name="section"></param>
     static void SectionSeparator(string section)
     {
-        Console.WriteLine("".PadRight(120, '*') +
+        Console.WriteLine("".PadRight(130, '*') +
             $"\n\t\t{section} \n"
-            + "".PadRight(120, '*'));
+            + "".PadRight(130, '*'));
     }
-
-    // grabbing patients Birth Year
-    static int AgeCalculator(int year)
+    /// <summary>
+    /// Removing Special characters from user inputsName
+    /// </summary>
+    /// <param name="firstName"></param>
+    /// <param name="lastName"></param>
+    static void Run(string name)
+    {
+        
+        // Make own character set
+        Regex regex = new Regex("[@_!#$%^&*()<>?/|}{~:]");
+        // Pass the string in regex.IsMatch
+        // method
+        if (!regex.IsMatch(name))
+        {
+            Console.WriteLine("That's a good name");
+        }
+        else
+        {
+            Console.WriteLine("That is not a name");
+        }
+    }
+        /// <summary>
+        /// grabbing patients Birth Year
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        static int AgeCalculator(int year)
     {
        
         if (year !<= 1900)
@@ -118,6 +145,7 @@ class Program
         {
 
         }
+       
         return DateTime.Now.Year - year;
     }
 
