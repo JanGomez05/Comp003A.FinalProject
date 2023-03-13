@@ -4,6 +4,8 @@
  * Course: Comp003A L01
  * 
  */
+using System.Reflection;
+
 namespace Conp003A.FinalProject;
 class Program
 {
@@ -16,8 +18,11 @@ class Program
 
         Console.WriteLine("Enter a first name");
         string firstName = Console.ReadLine();
+
         Console.WriteLine("PLease enter yout Last Name");
         string lastName = Console.ReadLine();
+
+        Console.WriteLine($" So you are {firstName} {lastName}");
 
         Console.WriteLine("Please enter the year you were born.");
         int year = Convert.ToInt32(Console.ReadLine());
@@ -47,34 +52,42 @@ class Program
                 Console.WriteLine($"{firstName}, please enter out of the choices selected");
                 break;
         }
-        string userInput = Console.ReadLine();
+
+
+        List<string> response = new List<string>();
+
         List<string> my_list = new List<string>();
 
         my_list.Add("Are you enjoying your visit?");
-        my_list.Add(userInput);
+
         my_list.Add("Are You currently feeling pain?");
-        my_list.Add(userInput);
+
         my_list.Add("In the past few months have you been out of the country?");
-        my_list.Add(userInput);
+
         my_list.Add("Have you been having fever like symptoms?");
-        my_list.Add(userInput);
+
         my_list.Add("Have you tested for covid-19 in the past 2-4 weeks?");
-        my_list.Add(userInput);
+
         my_list.Add("Are you physically active?");
-        my_list.Add(userInput);
+
         my_list.Add("Do you smoke?");
-        my_list.Add(userInput);
+
         my_list.Add("Do you drink alcohol?");
-        my_list.Add(userInput);
+
         my_list.Add("Have you been consuming drugs?");
-        my_list.Add(userInput);
+
         my_list.Add("Do you have any allergins?");
-        my_list.Add(userInput);
+
 
         foreach (string a in my_list)
         {
+
             Console.WriteLine(a);
+            string answer = Console.ReadLine();
+            response.Add(answer);
+
         }
+
 
     }// end of main code.
     /// <summary>
@@ -83,27 +96,29 @@ class Program
     /// <param name="section"></param>
     static void SectionSeparator(string section)
     {
-        Console.WriteLine("".PadRight(110, '*') +
+        Console.WriteLine("".PadRight(120, '*') +
             $"\n\t\t{section} \n"
-            + "".PadRight(110, '*'));
+            + "".PadRight(120, '*'));
     }
 
     // grabbing patients Birth Year
     static int AgeCalculator(int year)
     {
-
-        if (year <= 1900)
+       
+        if (year !<= 1900)
         {
 
             Console.WriteLine("Please choose a realistic year.");
         }
-        if (year >= 2010)
+        else if (year !>= 2010)
+        {
+            Console.WriteLine("You know that's impossible.");
+        }
+        else
         {
 
-            Console.WriteLine("You know that's impossible.");
         }
         return DateTime.Now.Year - year;
     }
-
 
 }
