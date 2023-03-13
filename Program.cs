@@ -16,16 +16,16 @@ class Program
         SectionSeparator("Welcome to Hanfords Clinic!" +
          " Here is a Registry for new Patients." +
          " Please Answer and Label the inquiery.");
-        
+
         Console.WriteLine("Enter a first name");
         string firstName = Console.ReadLine();
         Run(firstName);
-
+        
         Console.WriteLine("PLease enter yout Last Name");
         string lastName = Console.ReadLine();
-        Run(lastName);
-
-        Console.WriteLine($" So you are {firstName} {lastName}");
+        Run2(lastName);
+        
+        Console.WriteLine($"\n So you are {firstName} {lastName}");
 
         Console.WriteLine("Please enter the year you were born.");
         int year = Convert.ToInt32(Console.ReadLine());
@@ -104,40 +104,69 @@ class Program
             + "".PadRight(130, '*'));
     }
     /// <summary>
-    /// Removing Special characters from user inputsName
+    /// removing special characters from first name
     /// </summary>
-    /// <param name="firstName"></param>
-    /// <param name="lastName"></param>
-    static void Run(string name)
+    /// <param name="name1"></param>
+    static void Run(string name1)
     {
         
         // Make own character set
         Regex regex = new Regex("[@_!#$%^&*()<>?/|}{~:]");
         // Pass the string in regex.IsMatch
         // method
-        if (!regex.IsMatch(name))
-        {
+        if (!regex.IsMatch(name1))
+        { 
             Console.WriteLine("That's a good name");
+            
         }
         else
         {
             Console.WriteLine("That is not a name");
+            Console.WriteLine("Please try again. Enter your first name");
+            string firstName = Console.ReadLine();
+            Run(firstName);
         }
     }
-        /// <summary>
-        /// grabbing patients Birth Year
-        /// </summary>
-        /// <param name="year"></param>
-        /// <returns></returns>
-        static int AgeCalculator(int year)
+
+    /// <summary>
+    /// removing special characters from last name
+    /// </summary>
+    /// <param name="name2"></param>
+    static void Run2(string name2)
+    {
+
+        // Make own character set
+        Regex regex = new Regex("[@_!#$%^&*()<>?/|}{~:]");
+        // Pass the string in regex.IsMatch
+        // method
+        if (!regex.IsMatch(name2))
+        {
+            Console.WriteLine("That's a good name");
+            
+        }
+        else
+        {
+            Console.WriteLine("That is not a name");
+            Console.WriteLine("Please try again. Enter your last name");
+            string lastName = Console.ReadLine();
+            Run(lastName);
+        }
+    }
+
+    /// <summary>
+    /// grabbing patients Birth Year
+    /// </summary>
+    /// <param name="year"></param>
+    /// <returns></returns>
+    static int AgeCalculator(int year)
     {
        
-        if (year !<= 1900)
+        if (year <= 1900)
         {
 
             Console.WriteLine("Please choose a realistic year.");
         }
-        else if (year !>= 2010)
+        else if (year >= 2010)
         {
             Console.WriteLine("You know that's impossible.");
         }
