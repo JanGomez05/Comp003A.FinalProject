@@ -4,7 +4,6 @@
  * Course: Comp003A L01
  * 
  */
-using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Conp003A.FinalProject;
@@ -18,19 +17,27 @@ class Program
          " Please Answer and Label the inquiery.");
 
         Console.WriteLine("Enter a first name");
-        string firstName = Console.ReadLine();
-        Run(firstName);
+        string firstName = Run(Console.ReadLine());
+        
         
         Console.WriteLine("PLease enter yout Last Name");
-        string lastName = Console.ReadLine();
-        Run2(lastName);
+        string lastName = Run(Console.ReadLine());
+        
         
         Console.WriteLine($"\n So you are {firstName} {lastName}");
 
-        Console.WriteLine("Please enter the year you were born.");
-        int year = Convert.ToInt32(Console.ReadLine());
-        Console.WriteLine($"Your age is: {AgeCalculator(year)}");
+        try
+        {
 
+
+            Console.WriteLine("Please enter the year you were born.");
+            int year = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(AgeCalculator(year));
+        }
+        catch
+        {
+            Console.WriteLine("That is wrong");
+        }
         char gender;
 
         Console.WriteLine("Pease insert your gender as M/m , F/f or O/o:");
@@ -106,53 +113,27 @@ class Program
     /// <summary>
     /// removing special characters from first name
     /// </summary>
-    /// <param name="name1"></param>
-    static void Run(string name1)
+    /// <param name="Name"></param>
+    static string Run(string name)
     {
-        
         // Make own character set
         Regex regex = new Regex("[@_!#$%^&*()<>?/|}{~:]");
         // Pass the string in regex.IsMatch
         // method
-        if (!regex.IsMatch(name1))
+        if (!regex.IsMatch(name))
         { 
             Console.WriteLine("That's a good name");
-            
+            return name;
         }
         else
         {
             Console.WriteLine("That is not a name");
-            Console.WriteLine("Please try again. Enter your first name");
-            string firstName = Console.ReadLine();
-            Run(firstName);
+            Console.WriteLine("Please try again. Enter a valid name");
+            name = Console.ReadLine();
+            Run(name);
+            return name;
         }
     }
-
-    /// <summary>
-    /// removing special characters from last name
-    /// </summary>
-    /// <param name="name2"></param>
-    static void Run2(string name2)
-    {
-
-        // Make own character set
-        Regex regex = new Regex("[@_!#$%^&*()<>?/|}{~:]");
-        // Pass the string in regex.IsMatch
-        // method
-        if (!regex.IsMatch(name2))
-        {
-            Console.WriteLine("That's a good name");
-            
-        }
-        else
-        {
-            Console.WriteLine("That is not a name");
-            Console.WriteLine("Please try again. Enter your last name");
-            string lastName = Console.ReadLine();
-            Run(lastName);
-        }
-    }
-
     /// <summary>
     /// grabbing patients Birth Year
     /// </summary>
@@ -161,21 +142,17 @@ class Program
     static int AgeCalculator(int year)
     {
        
-        if (year <= 1900)
+        if (year <= 1900 || year >= 2010)
         {
 
-            Console.WriteLine("Please choose a realistic year.");
-        }
-        else if (year >= 2010)
-        {
-            Console.WriteLine("You know that's impossible.");
-        }
-        else
-        {
-
+                Console.WriteLine("Please choose a realistic year.");
+                year = Convert.ToInt32(Console.ReadLine());
+                AgeCalculator(year);
+            
         }
        
         return DateTime.Now.Year - year;
+        Console.WriteLine($"Your age is: {AgeCalculator(year)}");
     }
 
 }
