@@ -113,14 +113,14 @@ namespace finalproject_from_class
                 responses.Add(answer);
 
             }
+
+            Console.WriteLine("Here is a record of your questions and responses");
            // printing out question and responses
             for (int i =0;i<question.Count; i++)
             {
-                Console.WriteLine("These were your questions.");
                 Console.WriteLine(question[i]);
                 Console.WriteLine(responses[i]);
             }
-
 
         }// end of main code.
 
